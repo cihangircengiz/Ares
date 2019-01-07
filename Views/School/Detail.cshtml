@@ -1,0 +1,197 @@
+﻿@model Ares.EntityData.Model.School
+@{
+    ViewBag.Title = "Detail";
+    ViewBag.Current = "School";
+}
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="index.html" title="School Detail Page" class="tip-bottom"><i class="icon-home"></i>@Model.name School Detail</a></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>Okul-Bilgileri</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form method="post" action="~/School/Detail" class="form-horizontal">
+                    <input type="hidden" name="id" value="@Model.id" />
+                    <div class="control-group">
+                        <label class="control-label">Okul Adı :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="School name" name="name" value="@Model.name">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Email :</label>
+                        <div class="controls">
+                            <input type="email" class="span11" placeholder="Email" name="email" value="@Model.email">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Adres :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Address" name="address" value="@Model.address">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Telefon :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Telefon" name="phone" value="@Model.phone">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">İl :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="il" name="city" value="@Model.city">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">İlçce :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="İlçe" name="town" value="@Model.town">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Yetkili Adı :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Yetkili Adı" name="authorizePersonName" value="@Model.authorizePersonName">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label"> Mail :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Authorize Person Mail" name="authorizePersonMail" value="@Model.authorizePersonMail">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Telefon :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Telefon" name="authorizePersonPhone" value="@Model.authorizePersonPhone">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Enlem :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="LAT" name="lat" value="@Model.lat" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Boylam :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="LNG" name="lng" value="@Model.lng" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" value="Update" name="Update" class="btn btn-success">Güncelle</button>
+                        <button type="submit" value="Delete" name="Delete" class="btn btn-danger">Sil</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-th"></i></span>
+                    <h5>Öğrenci Tablosu</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table id="studentList" class="table table-bordered data-table">
+                        <thead>
+                            <tr>
+                                <th>Öğrenci Adı</th>
+                                <th>Okul</th>
+                                <th>Adres</th>
+                                <th>Telefon</th>
+                                <th>Oluşturma Tarihi</th>
+                            </tr>
+                        </thead>
+                        <tbody role="alert" aria-live="polite" aria-relevant="all">
+                            @foreach (var item in Model.Students)
+                            {
+                                <tr class="gradeA odd">
+                                    <td class="  sorting_1"><a href="/Student/Detail?id=@item.id">@item.name</a></td>
+                                    <td class=" ">@item.School.name</td>
+                                    <td class=" ">@item.address</td>
+                                    <td class=" ">@item.phone</td>
+                                    <td class="center ">@item.createdDate</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-th"></i></span>
+                    <h5>Rut Tablosu</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table id="RouteList" class="table table-bordered data-table">
+                        <thead>
+                            <tr>
+                                <th>Rut Adı</th>
+ 
+                                <th>Başlangıç Adresi</th>
+                                <th>Bitiş Adresi</th>
+                                <th>Oluşturma Tarihi</th>
+                            </tr>
+                        </thead>
+                        <tbody role="alert" aria-live="polite" aria-relevant="all">
+                            @foreach (var item in Model.Routes)
+                            {
+                                <tr class="gradeA odd">
+                                    <td class="  sorting_1"><a href="/Route/Detail?id=@item.id">@item.name</a></td>
+
+                                    <td class=" ">@item.startAddress</td>
+                                    <td class=" ">@item.finishAddress</td>
+                                    <td class="center ">@item.createdDate</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/assets/js/dataTable/jquery-3.3.1.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/dataTable/jquery.dataTables.min.js"></script>
+<script src="~/assets/js/dataTable/dataTables.buttons.min.js"></script>
+<script src="~/assets/js/dataTable/buttons.flash.min.js"></script>
+<script src="~/assets/js/dataTable/jszip.min.js"></script>
+<script src="~/assets/js/dataTable/pdfmake.min.js"></script>
+<script src="~/assets/js/dataTable/vfs_fonts.js"></script>
+<script src="~/assets/js/dataTable/buttons.html5.min.js"></script>
+<script src="~/assets/js/dataTable/buttons.print.min.js"></script>
+<script src="~/assets/js/matrix.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#studentList').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf', 'print'
+            ]
+        });
+    });
+    $(document).ready(function () {
+        $('#RouteList').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>

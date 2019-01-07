@@ -1,0 +1,133 @@
+﻿@model Ares.Models.ParentCrudModel
+@{
+    ViewBag.Title = "Parent Detail";
+    ViewBag.Current = "Parent";
+}
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="index.html" title="Parent Detail Page" class="tip-bottom"><i class="icon-home"></i> @Model.name Parent Detail</a></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>Veli-Bilgileri</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form method="post" action="~/Parent/Detail" class="form-horizontal">
+                    <input type="hidden" name="id" value="@Model.id" />
+                    <input type="hidden" name="sysUserId" value="@Model.sysUserId" />
+                    <div class="control-group">
+                        <label class="control-label">Veli Adı :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Veli Adı" name="name" value="@Model.name">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Email :</label>
+                        <div class="controls">
+                            <input type="email" class="span11" placeholder="Email" name="email" value="@Model.email">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Adres :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Adres" name="address" value="@Model.address">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Telefon :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Telefon" name="phone" value="@Model.phone">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">TC Kimlik  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="TC" name="tcNo" value="@Model.tcNo">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Kullanıcı Adı  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Kullanıcı Adı" name="username" value="@Model.username">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Şifre  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Şifre" name="password" value="@Model.password">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" value="Update" name="Update" class="btn btn-success">Güncelle</button>
+                        <button type="submit" value="Delete" name="Delete" class="btn btn-danger">Sil</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <a href="~/Student/Create?pid=@Model.id" class="btn btn-primary">Öğrenci Oluştur</a>
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-th"></i></span>
+                    <h5> Öğrenci Tablosu</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table id="childList">
+                        <thead>
+                            <tr>
+                                <th>Öğrenci Adı</th>
+                                <th>Adres</th>
+                                <th>Telefon</th>
+                                <th>Oluşturma Tarihi</th>
+                            </tr>
+                        </thead>
+                        <tbody role="alert" aria-live="polite" aria-relevant="all">
+                            @foreach (var item in Model.studentList)
+                            {
+                                <tr class="gradeA odd">
+                                    <td class="  sorting_1"><a href="/Student/Detail?id=@item.id">@item.name</a></td>
+                                    <td class=" ">@item.address</td>
+                                    <td class=" ">@item.phone</td>
+                                    <td class="center ">@item.createdDate</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--end-Footer-part-->
+<script src="~/assets/js/dataTable/jquery-3.3.1.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/dataTable/jquery.dataTables.min.js"></script>
+<script src="~/assets/js/dataTable/dataTables.buttons.min.js"></script>
+<script src="~/assets/js/dataTable/buttons.flash.min.js"></script>
+<script src="~/assets/js/dataTable/jszip.min.js"></script>
+<script src="~/assets/js/dataTable/pdfmake.min.js"></script>
+<script src="~/assets/js/dataTable/vfs_fonts.js"></script>
+<script src="~/assets/js/dataTable/buttons.html5.min.js"></script>
+<script src="~/assets/js/dataTable/buttons.print.min.js"></script>
+<script src="~/assets/js/matrix.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#childList').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>

@@ -1,0 +1,177 @@
+﻿@model Ares.Models.DashboardModel
+@{
+    ViewBag.Title = "Home Page";
+    ViewBag.Current = "Home";
+}
+
+<!--breadcrumbs-->
+<div id="content-header">
+    <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Anasayfa</a></div>
+</div>
+<!--End-breadcrumbs-->
+<!--Action boxes-->
+<div class="container-fluid">
+    <div class="quick-actions_homepage">
+        <ul class="quick-actions"></ul>
+    </div>
+    <!--End-Action boxes-->
+    <!--Chart-box-->
+    <div class="row-fluid">
+        <div class="widget-box">
+            <div class="widget-title bg_lg">
+                <span class="icon"><i class="icon-signal"></i></span>
+                <h5>Site Analytics</h5>
+            </div>
+            <div class="widget-content">
+                <div class="row-fluid">
+                    <div class="span9">
+                        <div class="chart"></div>
+                    </div>
+                    <div class="span3">
+                        <ul class="site-stats">
+                            <li class="bg_lh"><i class="icon-user"></i> <strong>@Model.studentCount</strong> <small>Toplam Öğrenci</small></li>
+                            <li class="bg_lh"><i class="icon-group"></i> <strong>@Model.parentCount</strong> <small>Veli Sayısı </small></li>
+                            <li class="bg_lh"><i class="icon-home"></i> <strong>@Model.schoolCount</strong> <small>Okul Sayısı</small></li>
+                            <li class="bg_lh"><i class="icon-map-marker"></i> <strong>@Model.stationCount</strong> <small>Durak Sayısı</small></li>
+                            <li class="bg_lh"><i class="icon-truck"></i> <strong>@Model.busCount</strong> <small>Servis Sayısı</small></li>
+                            <li class="bg_lh"><i class="icon-road"></i> <strong>@Model.routeCount</strong> <small>Güzergah Sayısı</small></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End-Chart-box-->
+    <hr />
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="widget-box">
+                <div class="widget-title bg_ly" data-toggle="collapse" href="#collapseG2">
+                    <span class="icon"><i class="icon-chevron-down"></i></span>
+                    <h5>Son 5 okul</h5>
+                </div>
+                <div class="widget-content nopadding collapse in" id="collapseG2">
+                    <ul class="recent-posts">
+                        @foreach (var item in Model.lastFiveSchool)
+                        {
+                            <li>
+                                <div class="user-thumb"> <img width="40" height="40" alt="User" src="~/assets/img/demo/av1.jpg"> </div>
+                                <div class="article-post">
+                                    <span class="user-info"> @item.createdDate</span>
+                                    <p><a href="/School/Detail?id=@item.id">@item.name</a> </p>
+                                </div>
+                            </li>
+                        }
+                        <li>
+                            <a href="/School/Index" class="btn btn-warning btn-mini">Tamamını Görüntüle</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="widget-box">
+                <div class="widget-title bg_ly" data-toggle="collapse" href="#collapseG3">
+                    <span class="icon"><i class="icon-chevron-down"></i></span>
+                    <h5>Son 5 öğrenci</h5>
+                </div>
+                <div class="widget-content nopadding collapse in" id="collapseG3">
+                    <ul class="recent-posts">
+                        @foreach (var item in Model.lastFiveStudent) 
+                        {
+                            <li>
+                                <div class="user-thumb"> <img width="40" height="40" alt="User" src="~/assets/img/demo/av1.jpg"> </div>
+                                <div class="article-post">
+                                    <span class="user-info"> @item.createdDate</span>
+                                    <p><a href="/Student/Detail?id=@item.id">@item.name</a> </p>
+                                </div>
+                            </li>
+                        }
+                        <li>
+                            <a href="/Student/Index" class="btn btn-warning btn-mini">Tamamını Görüntüle</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span6">
+            <div class="widget-box">
+                <div class="widget-title bg_ly" data-toggle="collapse" href="#collapseG4">
+                    <span class="icon"><i class="icon-chevron-down"></i></span>
+                    <h5>Son 5 Güzergah</h5>
+                </div>
+                <div class="widget-content nopadding collapse in" id="collapseG4">
+                    <ul class="recent-posts">
+                        @foreach (var item in Model.lastFiveRoute)
+                        {
+                            <li>
+                                <div class="user-thumb"> <img width="40" height="40" alt="User" src="~/assets/img/demo/av1.jpg"> </div>
+                                <div class="article-post">
+                                    <span class="user-info"> @item.createdDate</span>
+                                    <p><a href="/Route/Detail?id=@item.id">@item.name</a> </p>
+                                </div>
+                            </li>
+                        }
+                        <li>
+                            <a href="/Route/Index" class="btn btn-warning btn-mini">Tamamını Görüntüle</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            <div class="widget-box">
+                <div class="widget-title bg_ly" data-toggle="collapse" href="#collapseG5">
+                    <span class="icon"><i class="icon-chevron-down"></i></span>
+                    <h5>Son 5 Servis</h5>
+                </div>
+                <div class="widget-content nopadding collapse in" id="collapseG5">
+                    <ul class="recent-posts">
+                        @foreach (var item in Model.lastFiveBus)
+                        {
+                            <li>
+                                <div class="user-thumb"> <img width="40" height="40" alt="User" src="~/assets/img/demo/av1.jpg"> </div>
+                                <div class="article-post">
+                                    <span class="user-info"> @item.createdDate</span>
+                                    <p><a href="/Bus/Detail?id=@item.id">@item.authorizePersonName - @item.plate</a> </p>
+                                </div>
+                            </li>
+                        }
+                        <li>
+                            <a href="/Bus/Index" class="btn btn-warning btn-mini">Tamamını Görüntüle</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--end-Footer-part-->
+<script src="~/assets/js/excanvas.min.js"></script>
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/assets/js/jquery.ui.custom.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/jquery.flot.min.js"></script>
+<script src="~/assets/js/jquery.flot.resize.min.js"></script>
+<script src="~/assets/js/jquery.peity.min.js"></script>
+<script src="~/assets/js/fullcalendar.min.js"></script>
+<script src="~/assets/js/matrix.js"></script>
+<script src="~/assets/js/matrix.dashboard.js"></script>
+@*<script src="~/assets/js/jquery.gritter.min.js"></script>*@
+@*<script src="~/assets/js/matrix.interface.js"></script>*@
+<script src="~/assets/js/matrix.chat.js"></script>
+<script src="~/assets/js/jquery.validate.js"></script>
+<script src="~/assets/js/matrix.form_validation.js"></script>
+<script src="~/assets/js/jquery.wizard.js"></script>
+<script src="~/assets/js/jquery.uniform.js"></script>
+<script src="~/assets/js/select2.min.js"></script>
+<script src="~/assets/js/matrix.popover.js"></script>
+<script src="~/assets/js/jquery.dataTables.min.js"></script>
+<script src="~/assets/js/matrix.tables.js"></script>

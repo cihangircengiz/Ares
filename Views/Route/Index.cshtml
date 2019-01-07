@@ -1,0 +1,70 @@
+﻿@model List<Ares.EntityData.Model.School>
+@{
+    ViewBag.Title = "Route Page";
+    ViewBag.Current = "Route";
+}
+<script>
+ 
+</script>
+<div id="content-header">
+    <div id="breadcrumb"> <a href="index.html" title="Go to School Page" class="tip-bottom"><i class="icon-home"></i> Rut Sayfası</a></div>
+</div>
+<div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-th"></i></span>
+                    <h5>Bilgi Tablosu</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table id="schoolList" class="table table-bordered data-table">
+                        <thead>
+                            <tr>
+                                <th>Okul Adı</th>
+                                <th>Yetkili Kişi</th>
+                                <th>İl</th>
+                                <th>Oluşturma Tarihi</th>
+                            </tr>
+                        </thead>
+                        <tbody role="alert" aria-live="polite" aria-relevant="all">
+                            @foreach (var item in Model)
+                            {
+                                <tr class="gradeA odd">
+                                    <td class="  sorting_1"><a href="/Route/SchoolRoute?schoolId=@item.id">@item.name</a></td>
+                                    <td class=" ">@item.authorizePersonName</td>
+                                    <td class=" ">@item.city</td>
+                                    <td class="center ">@item.createdDate</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end-Footer-part-->
+<script src="~/assets/js/dataTable/jquery-3.3.1.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/dataTable/jquery.dataTables.min.js"></script>
+<script src="~/assets/js/dataTable/dataTables.buttons.min.js"></script>
+<script src="~/assets/js/dataTable/buttons.flash.min.js"></script>
+<script src="~/assets/js/dataTable/jszip.min.js"></script>
+<script src="~/assets/js/dataTable/pdfmake.min.js"></script>
+<script src="~/assets/js/dataTable/vfs_fonts.js"></script>
+<script src="~/assets/js/dataTable/buttons.html5.min.js"></script>
+<script src="~/assets/js/dataTable/buttons.print.min.js"></script>
+<script src="~/assets/js/matrix.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#schoolList').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'excel', 'pdf', 'print'
+            ]
+        });
+    });
+</script>

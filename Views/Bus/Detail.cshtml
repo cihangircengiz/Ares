@@ -1,0 +1,131 @@
+﻿@model Ares.Models.BusCrudModel
+@{ 
+    ViewBag.Title = "Bus Detail";
+    ViewBag.Current = "Bus";
+}
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="index.html" title="Bus Detail Page" class="tip-bottom"><i class="icon-home"></i> @Model.authorizePersonName - @Model.plate Bus Detail</a></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>Servis-Bilgileri</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form method="post" action="~/Bus/Detail" class="form-horizontal">
+                    <input type="hidden" name="id" value="@Model.id" />
+                    <input type="hidden" name="sysUserId" value="@Model.sysUserId" />
+                    <div class="control-group">
+                        <label class="control-label">Yetkili Kişi Adı :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Veli Adı" name="authorizePersonName" value="@Model.authorizePersonName">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Yetkili Kişi Email :</label>
+                        <div class="controls">
+                            <input type="email" class="span11" placeholder="Email" name="authorizePersonMail" value="@Model.authorizePersonMail">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Yetkili kişi Telefonu :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Yetkili kişi Telefonu" name="authorizePersonPhone" value="@Model.authorizePersonPhone">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Plaka  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Plaka" name="plate" value="@Model.plate">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Model  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Model" name="model" value="@Model.model">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Marka  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Marka" name="brand" value="@Model.brand">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Maximum Koltuk Sayısı  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Koltuk Sayısı" name="maxSeatCount" value="@Model.maxSeatCount">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Kullanıcı Adı  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Kullanıcı Adı" name="username" value="@Model.username">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Şifre  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Şifre" name="password" value="@Model.password">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" value="Update" name="Update" class="btn btn-success">Güncelle</button>
+                        <button type="submit" value="Delete" name="Delete" class="btn btn-danger">Sil</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"><i class="icon-th"></i></span>
+                    <h5>Rut Tablosu</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <table class="table table-bordered data-table">
+                        <thead>
+                            <tr>
+                                <th>Rut Tablosu</th>
+                                <th>Servis</th>
+                                <th>Başlangıç Adresi</th>
+                                <th>Bitiş Adresi</th>
+                                <th>Oluşturma Tarihi</th>
+                            </tr>
+                        </thead>
+                        <tbody role="alert" aria-live="polite" aria-relevant="all">
+                            @foreach (var item in Model.busRoutes)
+                            {
+                                <tr class="gradeA odd">
+                                    <td class="  sorting_1"><a href="/Route/Detail?id=@item.id">@item.name</a></td>
+                                    <td class=" ">@item.Bus.plate</td>
+                                    <td class=" ">@item.startAddress</td>
+                                    <td class=" ">@item.finishAddress</td>
+                                    <td class="center ">@item.createdDate</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/assets/js/jquery.ui.custom.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/bootstrap-colorpicker.js"></script>
+<script src="~/assets/js/bootstrap-datepicker.js"></script>
+<script src="~/assets/js/masked.js"></script>
+<script src="~/assets/js/jquery.uniform.js"></script>
+<script src="~/assets/js/select2.min.js"></script>
+<script src="~/assets/js/matrix.js"></script>
+<script src="~/assets/js/jquery.peity.min.js"></script>
+<script src="~/assets/js/bootstrap-wysihtml5.js"></script> 

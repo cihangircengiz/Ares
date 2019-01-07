@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Create Parent";
+    ViewBag.Current = "Parent";
+}
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="index.html" title="Create Parent Page" class="tip-bottom"><i class="icon-home"></i> Veli Kayıt</a></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>Veli-Bilgileri</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form method="post" action="~/Parent/Create" class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Veli Adı :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Veli Adı" name="name" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Email :</label>
+                        <div class="controls">
+                            <input type="email" class="span11" placeholder="Email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Adres :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Adres" name="address" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Telefon :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Telefon" name="phone">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">TC Kimlik No  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="TC" name="tcNo" required maxlength="11">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Şifre  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Şifre" name="password" required>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/assets/js/jquery.ui.custom.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/bootstrap-colorpicker.js"></script>
+<script src="~/assets/js/bootstrap-datepicker.js"></script>
+<script src="~/assets/js/masked.js"></script>
+<script src="~/assets/js/jquery.uniform.js"></script>
+<script src="~/assets/js/select2.min.js"></script>
+<script src="~/assets/js/matrix.js"></script>
+<script src="~/assets/js/jquery.peity.min.js"></script>
+<script src="~/assets/js/bootstrap-wysihtml5.js"></script> 

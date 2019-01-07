@@ -1,0 +1,104 @@
+﻿@model Ares.Models.RouteCrudModel
+@{
+    ViewBag.Title = "Route Page";
+    ViewBag.Current = "Route"; ;
+}
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Create Student Page" class="tip-bottom"><i class="icon-home"></i> Rut Kayıt</a></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>Rut-Bilgileri</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form method="post" action="~/Route/Create" class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Güzergah Adı :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Güzergah Adı" name="name" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Başlangıç Adresi :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Başlangıç Adresi" name="startAddress" required>
+                        </div>
+                    </div>
+                    @*<div class="control-group">
+                        <label class="control-label">Bitiş Adresi :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Bitiş Adresi" name="finishAddress" >
+                        </div>
+                    </div>*@
+                    <div class="control-group">
+                        <label class="control-label">Açıklama :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Açıklama" name="description">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Ortalama Saat :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Ortalama Saat" name="averageTime">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Varış :</label>
+                        <div class="controls">
+                            <select name="schoolId">
+                                @foreach (var item in Model.schoolList)
+                                {
+                                    <option value="@item.id">@item.name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Sabah :</label>
+                        <div class="controls">
+                            <select name="busId">
+                                <option> </option>
+                                @foreach (var item in Model.busList)
+                                {
+                                    <option value="@item.id">@item.authorizePersonName - @item.plate</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Akşam :</label>
+                        <div class="controls">
+                            <select name="busId2">
+                                <option> </option>
+                                @foreach (var item in Model.busList)
+                                {
+                                    <option value="@item.id">@item.authorizePersonName - @item.plate</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/assets/js/jquery.ui.custom.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/bootstrap-colorpicker.js"></script>
+<script src="~/assets/js/bootstrap-datepicker.js"></script>
+<script src="~/assets/js/masked.js"></script>
+<script src="~/assets/js/jquery.uniform.js"></script>
+<script src="~/assets/js/select2.min.js"></script>
+<script src="~/assets/js/matrix.js"></script>
+<script src="~/assets/js/jquery.peity.min.js"></script>
+<script src="~/assets/js/bootstrap-wysihtml5.js"></script> 

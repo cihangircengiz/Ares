@@ -1,0 +1,197 @@
+﻿@model Ares.Models.StudentCrudModel
+@{
+    ViewBag.Title = "Student Page";
+    ViewBag.Current = "Student";
+}
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Create Student Page" class="tip-bottom"><i class="icon-home"></i> Öğrenci Kayıt</a></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>Öğrenci-Bilgileri</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form method="post" action="~/Student/Detail" class="form-horizontal">
+                    <input type="hidden" name="id" value="@Model.id" />
+                    <input type="hidden" name="parentId" value="@Model.parentId" />
+                    <div class="control-group">
+                        <label class="control-label">Öğrenci Adı :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Öğrenci Adı" name="name" value="@Model.name" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">TC Kimlik :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="TC" name="tcNo" value="@Model.tcNo" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Adres :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Adres" name="address" id="address" value="@Model.address" required>
+                            <input id="btnShow" type="button" value="Show Maps" />
+                            <div id="dialog" style="display: none">
+                                <div id="dvMap" style="height: 380px; width: 580px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Telefon :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Telefon" name="phone" value="@Model.phone">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Kan Grubu  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Kan Grubu" name="bloodGroup" value="@Model.bloodGroup">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Okul :</label>
+                        <div class="controls">
+                            <select name="schoolId">
+                                <option value="@Model.school.id">@Model.school.name</option>
+                                @foreach (var item in Model.schoolList)
+                                {
+                                    <option value="@item.id">@item.name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Servis Bilgileri :</label>
+                        <div class="controls">
+                            <select name="serviceProperty">
+                                @if (Model.serviceProperty == 4)
+                                {
+                                    <option value="4">Gidiş</option>
+                                    <option value="5">Dönüş</option>
+                                    <option value="6">Gidiş-Dönüş</option>
+                                }
+                                @if (Model.serviceProperty == 5)
+                                {
+                                    <option value="5">Dönüş</option>
+                                    <option value="4">Gidiş</option>
+                                    <option value="6">Gidiş-Dönüş</option>
+                                }
+                                @if (Model.serviceProperty == 6)
+                                {
+                                    <option value="6">Gidiş-Dönüş</option>
+                                    <option value="5">Dönüş</option>
+                                    <option value="4">Gidiş</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Öğrenci Tutar  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Öğrenci Tutar" name="totalAmount" value="@Model.totalAmount">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Enlem  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Enlem" name="lng" id="lng" value="@Model.lng" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Boylam  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Boylam" name="lat" id="lat" value="@Model.lat" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Durak Adı  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Durak Adı (Nullable)" name="stationName" value="@Model.stationName">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" value="Update" name="Update" class="btn btn-success">Güncelle</button>
+                        <button type="submit" value="Delete" name="Delete" class="btn btn-danger">Sil</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/assets/js/jquery.ui.custom.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/bootstrap-colorpicker.js"></script>
+<script src="~/assets/js/bootstrap-datepicker.js"></script>
+<script src="~/assets/js/masked.js"></script>
+<script src="~/assets/js/jquery.uniform.js"></script>
+<script src="~/assets/js/select2.min.js"></script>
+<script src="~/assets/js/matrix.js"></script>
+<script src="~/assets/js/jquery.peity.min.js"></script>
+<script src="~/assets/js/bootstrap-wysihtml5.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF4fZ_6PlAfMP2pgwo2sisPSh42aWlfXo"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
+<link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/blitzer/jquery-ui.css"
+      rel="stylesheet" type="text/css" />
+<script>
+    var lnglat = null;
+    function codeAddress(address, callback) {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ address: address }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                lnglat = results[0].geometry.location;
+                callback();
+            }
+            else {
+                console.log('Geocode was not successful for the following reason: ' + status);
+            }
+        });
+    }
+</script>
+<script type="text/javascript">
+    $(function () {
+        $("#btnShow").click(function () {
+            var address = document.getElementById("address").value;
+            codeAddress(address, function () {
+                $("#dialog").dialog({
+                    modal: true,
+                    title: "Google Map",
+                    width: 600,
+                    hright: 450,
+                    buttons: {
+                        Close: function () {
+                            $(this).dialog('close');
+                        }
+                    },
+                    open: function () {
+                        // console.log(lnglat);
+                        var mapOptions = {
+                            center: lnglat,
+                            zoom: 16,
+                        }
+                        var map = new google.maps.Map($("#dvMap")[0], mapOptions);
+                        var marker = new google.maps.Marker({
+                            position: lnglat,
+                            map: map,
+                            draggable: true,
+                        });
+                        marker.addListener("dragend", function () {
+                            // console.log(this.position.lat(), this.position.lng());
+
+                            document.getElementById("lat").value = this.position.lat().toString().replace(".", ",");
+                            document.getElementById("lng").value = this.position.lng().toString().replace(".", ",");
+                        });
+                    }
+                });
+            });
+        });
+    });
+</script>

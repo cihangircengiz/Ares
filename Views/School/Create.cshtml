@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewBag.Title = "Create School";
+    ViewBag.Current = "School";
+}
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="index.html" title="Create School Page" class="tip-bottom"><i class="icon-home"></i> Okul Kayıt</a></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>Okul Bilgileri</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form method="post" action="~/School/Create" class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Okul Adı :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Okul Adı" name="name" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Email :</label>
+                        <div class="controls">
+                            <input type="email" class="span11" placeholder="Email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Adres :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Address" name="address" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Telefon :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Telefon" name="phone" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">İl :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="İl" name="city" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">İlçe :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="İlçe" name="town" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Adı :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Adı" name="authorizePersonName" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">EMail :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="EMail" name="authorizePersonMail" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Telefon :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Telefon" name="authorizePersonPhone" required>
+                        </div>
+                    </div>
+                    @*<div class="control-group">
+                        <label class="control-label">LAT :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="LAT" name="lat">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">LNG :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="LNG" name="lng">
+                        </div>
+                    </div>*@
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/assets/js/jquery.ui.custom.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/bootstrap-colorpicker.js"></script>
+<script src="~/assets/js/bootstrap-datepicker.js"></script>
+<script src="~/assets/js/masked.js"></script>
+<script src="~/assets/js/jquery.uniform.js"></script>
+<script src="~/assets/js/select2.min.js"></script>
+<script src="~/assets/js/matrix.js"></script>
+<script src="~/assets/js/jquery.peity.min.js"></script>
+<script src="~/assets/js/bootstrap-wysihtml5.js"></script> 
+
+

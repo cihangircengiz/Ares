@@ -1,0 +1,66 @@
+﻿@model Ares.EntityData.Model.FirmLogin
+@{
+    ViewBag.Title = "Account Page";
+}
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="#" title="Account Page" class="tip-bottom"><i class="icon-home"></i> Hesap Bilgileri</a></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>Hesap-Bilgileri</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form method="post" action="~/Account/Detail" class="form-horizontal">
+                    <input type="hidden" name="id" value="@Model.id" />
+                    <input type="hidden" name="firmId" value="@Model.firmId" />
+                    <div class="control-group">
+                        <label class="control-label">Adı :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Öğrenci Adı" name="name" value="@Model.name">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Email :</label>
+                        <div class="controls">
+                            <input type="email" class="span11" placeholder="Email" name="email" value="@Model.email">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Kullanıcı Adı :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Kullanıcı Adı" name="username" value="@Model.username" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Şifre :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Şifre" name="password" value="@Model.password">
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Güncelle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/assets/js/jquery.ui.custom.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/bootstrap-colorpicker.js"></script>
+<script src="~/assets/js/bootstrap-datepicker.js"></script>
+<script src="~/assets/js/masked.js"></script>
+<script src="~/assets/js/jquery.uniform.js"></script>
+<script src="~/assets/js/select2.min.js"></script>
+<script src="~/assets/js/matrix.js"></script>
+<script src="~/assets/js/jquery.peity.min.js"></script>
+<script src="~/assets/js/bootstrap-wysihtml5.js"></script> 
+
+

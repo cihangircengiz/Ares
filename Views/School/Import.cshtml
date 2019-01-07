@@ -1,0 +1,90 @@
+﻿@model List<Ares.EntityData.Model.School>
+@{
+    ViewBag.Title = "Import";
+    ViewBag.Current = "School";
+}
+<style>
+    #myProgress {
+        width: 100%;
+        background-color: #ddd;
+    }
+
+    #myBar {
+        width: 1%;
+        display:none;
+        height: 30px;
+        background-color: #4CAF50;
+    }
+</style>
+<div id="content-header">
+    <div id="breadcrumb"> <a href="index.html" title="Go to School Page" class="tip-bottom"><i class="icon-home"></i> Excel Dosyası ekle</a></div>
+</div>
+<div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>Okul ekle  </h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form action="#" method="post" enctype="multipart/form-data" class="form-horizontal" onSubmit="document.getElementById('submit').disabled=true;">
+                    <div class="control-group">
+                        <label class="control-label">Okul</label>
+                        <div class="controls">
+                            <select name="id">
+                                @foreach (var item in Model)
+                                {
+                                    <option value="@item.id">@item.name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Dosya</label>
+                        <div class="controls">
+                            <input type="file" name="file" />
+                        </div>
+                    </div>
+                    <div>
+                        <a href="~/assets/files/Ornek.xlsx" ><i>Örnek Excel Listesi için Tıklayınız</i></a>
+                    </div>
+                    <div class="form-actions">
+                        <button id="submit" type="submit" onclick="move()" class="btn btn-success">Kaydet</button>
+                    </div>
+                </form>
+                <div id="myProgress">
+                    <div id="myBar"><p><b>Lütfen Bekleyin..</b></p></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/js/dataTable/jquery-3.3.1.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/dataTable/jquery.dataTables.min.js"></script>
+<script src="~/assets/js/dataTable/dataTables.buttons.min.js"></script>
+<script src="~/assets/js/dataTable/buttons.flash.min.js"></script>
+<script src="~/assets/js/dataTable/jszip.min.js"></script>
+<script src="~/assets/js/dataTable/pdfmake.min.js"></script>
+<script src="~/assets/js/dataTable/vfs_fonts.js"></script>
+<script src="~/assets/js/dataTable/buttons.html5.min.js"></script>
+<script src="~/assets/js/dataTable/buttons.print.min.js"></script>
+<script src="~/assets/js/matrix.js"></script>
+<script>
+    function move() {
+        var elem = document.getElementById("myBar");
+        document.getElementById("myBar").style.display = "block";
+        var width = 1;
+        var id = setInterval(frame, 600);
+        function frame() {
+            if (width >= 100) {
+                clearInterval(id);
+            } else {
+                width++;
+                elem.style.width = width + '%';
+            }
+        }
+    }
+</script>

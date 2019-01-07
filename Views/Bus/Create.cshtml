@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Create Bus";
+    ViewBag.Current = "Bus";
+}
+
+<div id="content-header">
+    <div id="breadcrumb"> <a href="index.html" title="Create Bus Page" class="tip-bottom"><i class="icon-home"></i> Servis Kayıt</a></div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="widget-box">
+            <div class="widget-title">
+                <span class="icon"> <i class="icon-align-justify"></i> </span>
+                <h5>Servis-Bilgileri</h5>
+            </div>
+            <div class="widget-content nopadding">
+                <form method="post" action="~/Bus/Create" class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label">Yetkili Kişi Adı :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Yetkili Kişi Adı" name="authorizePersonName" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Yetkili Kişi Email :</label>
+                        <div class="controls">
+                            <input type="email" class="span11" placeholder="Email" name="authorizePersonMail" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Yetkili Kişi Telefon :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Yetkili Kişi Telefon" name="authorizePersonPhone" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Plaka  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Plaka" name="plate" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Model  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Model" name="model" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Marka  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Marka" name="brand" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Maximum Koltuk Sayısı  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Koltuk Sayısı" name="maxSeatCount" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Kullanıcı Adı  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Kullanıcı Adı" name="username" required>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Şifre  :</label>
+                        <div class="controls">
+                            <input type="text" class="span11" placeholder="Şifre" name="password" required>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/assets/js/jquery.ui.custom.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/bootstrap-colorpicker.js"></script>
+<script src="~/assets/js/bootstrap-datepicker.js"></script>
+<script src="~/assets/js/masked.js"></script>
+<script src="~/assets/js/jquery.uniform.js"></script>
+<script src="~/assets/js/select2.min.js"></script>
+<script src="~/assets/js/matrix.js"></script>
+<script src="~/assets/js/jquery.peity.min.js"></script>
+<script src="~/assets/js/bootstrap-wysihtml5.js"></script> 

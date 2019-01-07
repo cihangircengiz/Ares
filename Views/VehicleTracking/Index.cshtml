@@ -1,0 +1,117 @@
+﻿@model Ares.EntityData.Model.Firm
+@{
+    ViewBag.Title = "Araç Takip";
+    ViewBag.Current = "VehicleTracking";
+}
+<div id="content-header">
+    <div id="breadcrumb">
+        @*@if (Model.studentList.Count != 0)
+            {
+                schoolName = Model.studentList[0].School.name;
+                <a href="index.html" title="Go to Student Page" class="tip-bottom"><i class="icon-home"></i> @schoolName Güzergah Sayfası</a>
+            }
+            else
+            {
+
+                <a href="index.html" title="Go to Student Page" class="tip-bottom"><i class="icon-home"></i> Güzergah Sayfası</a>
+            }*@
+
+    </div>
+</div>
+<hr />
+<style>
+    .form-control {
+        width: 90%;
+    }
+
+    .new-type {
+        overflow: hidden;
+        z-index: 9999 !important;
+        position: fixed;
+        overflow-y: hidden;
+        display: none;
+    }
+
+    .tab-content {
+        overflow: hidden;
+    }
+</style>
+<div class="container-fluid">
+    <div id="map" style="width: 100%; height: 800px;"></div>
+</div>
+<script>
+    var map;
+    var markers = [];
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 38.401, lng: 27.102 },
+            zoom: 12
+        });
+        //var marker = new google.maps.Marker({
+        //    position: { lat: 38.37106, lng: 27.085206 },
+        //    map: map,
+        //    title: 'Hello World!'
+        //});
+    }
+    function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(map);
+        }
+    }
+    function clearMarkers() {
+        setMapOnAll(null);
+        markers = [];
+    }
+    // Shows any markers currently in the array.
+    function showMarkers() {
+        setMapOnAll(map);
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF4fZ_6PlAfMP2pgwo2sisPSh42aWlfXo&callback=initMap"></script>
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/assets/js/jquery.ui.custom.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/jquery.uniform.js"></script>
+<script>
+    $(document).ready(function () {
+        getInfo();
+    });
+    setInterval(getInfo, 3399);
+    function getInfo() {
+        $.ajax({
+            url: "/VehicleTracking/GetLocationBuses",
+            type: "POST",
+            headers: { "cache-control": "no-cache" },
+            data: { firmID: @Model.id },
+            success: function (data) {
+                //console.log("Success");
+                clearMarkers();
+                buses = JSON.parse(data);
+                var infowindow = new google.maps.InfoWindow();
+                //console.log(buses);
+                for (bus of buses) {
+                    let datetime = new Date(bus.createDate);
+                    let marker = new google.maps.Marker({
+                        id: bus.id,
+                        map: map,
+                        position: new google.maps.LatLng(bus.Lat, bus.Lng),
+                        icon: "http://maps.google.com/mapfiles/ms/icons/bus.png",
+                        title: bus.Bus.plate,
+                        draggable: true,
+                    });
+                    marker.addListener('click', function () {
+                        infowindow.setContent("<p><b>Plaka</b>: " + bus.Bus.plate + "</p>" +
+                            "<p><b>Şöför: </b>" + bus.Bus.authorizePersonName + "</p>" +
+                            "<p><b>Son Konum Saati: </b>" + datetime.getHours() + ":" + datetime.getMinutes() + ":" + datetime.getSeconds() + "</p>");  
+                        infowindow.open(map, marker);
+                    });
+                    markers.push(marker);
+                }
+            },
+            error: function (jqXHR, status, error) {
+                console.log(status + ": " + error);
+            }
+        });
+        showMarkers();
+    }
+</script>

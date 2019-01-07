@@ -1,0 +1,380 @@
+﻿@model  Ares.Models.SchoolRouteModel
+@{
+    ViewBag.Title = "Route Page";
+    ViewBag.Current = "Route";
+    String schoolName = "";
+}
+<div id="content-header">
+    <div id="breadcrumb">
+        @if (Model.studentList.Count != 0)
+        {
+            schoolName = Model.studentList[0].School.name;
+            <a href="index.html" title="Go to Student Page" class="tip-bottom"><i class="icon-home"></i> @schoolName Güzergah Sayfası</a>
+        }
+        else
+        {
+            
+            <a href="index.html" title="Go to Student Page" class="tip-bottom"><i class="icon-home"></i> Güzergah Sayfası</a>
+        }
+
+    </div>
+</div>
+<hr/>
+<style>
+    .form-control { width: 90%; }
+
+    .new-type {
+        overflow: hidden;
+        z-index: 9999 !important;
+        position: fixed;
+        overflow-y: hidden;
+        display: none;
+    }
+
+    .tab-content { overflow: hidden; }
+</style>
+<div class="container-fluid">
+    <!-- Modal route assign -->
+    <div class="modal fade new-type" id="basicModal" tabindex="-1" style="" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Öğrenci Bilgileri</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div role="tabpanel">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#studentTab" aria-controls="studentTab" role="tab" data-toggle="tab">Öğrenci</a>
+
+                            </li>
+                            <li role="presentation">
+                                <a href="#parentTab" aria-controls="parentTab" role="tab" data-toggle="tab">Veli</a>
+
+                            </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="studentTab">
+                                <form id="information-form" name="information-form" action="~/Student/Update" method="post">
+                                    <input type="hidden" name="id" id="id" />
+                                    <div class="form-group">
+                                        <label for="student-name" class="col-form-label">İsim:</label>
+                                        <input type="text" name="name" class="form-control" id="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="student-address" class="col-form-label">Adres:</label>
+                                        <textarea class="form-control" disabled="disabled" name="stdaddress" id="stdaddress"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="student-phone" class="col-form-label">Telefon:</label>
+                                        <input type="text" name="phone" class="form-control" id="phone"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="routeId">Güzergah:</label>
+                                        <select class="form-control" name="routeId" id="routeId">
+                                            <option value="0"></option>
+                                            @foreach (var item in Model.routeList)
+                                            {
+                                                <option value=@item.id>@item.name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="parentTab">
+                                <div class="form-group">
+                                    <label for="parent-name" class="col-form-label">Veli Adı:</label>
+                                    <input type="text" disabled="disabled" class="form-control" id="parent-name"></input>
+                                </div>
+                                <div class="form-group">
+                                    <label for="parent-phone" class="col-form-label">Veli Telefonu:</label>
+                                    <input type="text" disabled="disabled" class="form-control" id="parent-phone"></input>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                    <button type="button" class="btn btn-primary" id="submitForm">Değişiklikleri Kaydet</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- ## END MODAL-->
+    <div id="map" style="width: 100%; height: 480px;"></div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon">
+                        <i class="icon-adjust"></i>
+                    </span> 
+                    <h5>Güzergah Optimizasyonu</h5>
+                </div>
+                <div class="widget-content">
+                    <form name="optimization" method="post" action="~/RouteCalculate/RouteOptimize" class="form-horizontal">
+                        <div class="control-group">
+                            @if(Model.studentList.Count > 0) { 
+                                <input type="hidden" name="schoolID" value="@Model.studentList.First().schoolId" />
+                            }
+                            <label for="seatCount" class="control-label">Grup Sayısı:</label>
+                            <div class="controls">
+                                <select name="seatCount" class="form-control">
+                                    <option value="18">18</option>
+                                    <option value="24">24</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="orderType" class="control-label" >Sıralama Şekli</label>
+                            <div class="controls">
+                                <select name="orderType" class="form-control">
+                                    <option value="1">Konuma Göre</option>
+                                    <option value="2">Mesafeye Göre</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <input class="btn btn-success" type="submit" value="Optimize" name="Calculate" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon">
+                        <i class="icon-th"></i>
+                    </span>
+                    @if (Model.studentList.Count != 0)
+                    {
+                        <h5>@Model.studentList[0].School.name Güzergah Listesi</h5>
+                    }
+                    else
+                    {
+                        <h5>Güzergah Listesi</h5>
+                    }
+                </div>
+                <div class="widget-content nopadding">
+                    <table class="table table-bordered data-table">
+                        <thead>
+                            <tr>
+                                <th>Güzergah Adı</th>
+                                <th>Başlangıç Adresi</th>
+                                <th>Bitiş Adresi</th>
+                                <th>Oluşturma Tarihi</th>
+                            </tr>
+                        </thead>
+                        <tbody role="alert" aria-live="polite" aria-relevant="all">
+                            @foreach (var item in Model.routeList)
+                            {
+                                <tr class="gradeA odd">
+                                    <td class="  sorting_1">
+                                        <a href="/Route/Detail?id=@item.id">@item.name</a>
+                                    </td>
+                                    <td class=" ">@item.startAddress</td>
+                                    <td class=" ">@item.finishAddress</td>
+                                    <td class="center ">@item.createdDate</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF4fZ_6PlAfMP2pgwo2sisPSh42aWlfXo"></script>
+<script>
+    function getJSONMarkers() {
+        const markers = [];
+        @foreach (var item in Model.studentList)
+        {
+            <text>
+                /// adding needed information
+                var lat = "@item.Station.Lat";
+                var lng = "@item.Station.Lng";
+                lat = lat.replace(",", ".");
+                lng = lng.replace(",", ".");
+                var obj = new Object();
+                obj["id"] = "@item.id";
+                obj["name"] = "@Html.Raw(item.name)";
+                obj["stdaddress"] = "@Html.Raw(item.Station.stationAddress)";
+                obj["location"] = [lat, lng];
+                obj["phone"] = "@item.phone";
+                obj["parentName"] = "@Html.Raw(item.Parent.name)";
+                obj["parentPhone"] = "@item.Parent.phone";
+                obj["routeid"] = "@item.Station.routeId";
+                markers.push(obj);
+            </text>
+        }
+        return markers;
+    }
+
+    var selectedmarker;
+    var colors = ["blue", "red", "purple", "orange", "yellow", "pink", "green"];
+    function loadMap() {
+        // Initialize Google Maps
+        const mapOptions = {
+            @{
+                double lat, lng;
+                string name = "";
+                try
+                {
+                    if(Model.studentList[0].School.lat > 40 && Model.studentList[0].School.lng > 40)
+                    {
+                        lat = 38.414480;
+                        lng = 27.144123;
+                    }
+                    else {
+                        lat = Model.studentList[0].School.lat;
+                        lng = Model.studentList[0].School.lng;
+                    }
+                }
+                catch
+                {
+                    lat = 38.414480;
+                    lng = 27.144123;
+                }
+            }
+            center: new google.maps.LatLng(("@lat").replace(",", "."), ("@lng").replace(",", ".")),
+            zoom: 11,
+            
+        }
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(("@lat").replace(",", "."), ("@lng").replace(",", ".")),
+            icon: "http://maps.google.com/mapfiles/ms/micons/rangerstation.png",
+            title: "@schoolName",
+        });
+        
+        const map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        marker.setMap(map);
+        // Load JSON Data
+        const stationMarkers = getJSONMarkers();
+        // Initialize Google Markers
+        for (station of stationMarkers) {
+            let marker = new google.maps.Marker({
+                id: station.id,
+                map: map,
+                position: new google.maps.LatLng(station.location[0], station.location[1]),
+                title: station.name,
+                animation: google.maps.Animation.DROP,
+                icon: "http://maps.google.com/mapfiles/ms/icons/"+colors[station.routeid%6]+"-dot.png",
+                customInfo: station,
+                draggable: true,
+            });
+            marker.addListener("click",
+                function() {
+                    // console.log(marker.id);
+                    selectedmarker = this;
+                    fillInfo();
+                    $('#basicModal').modal('show');
+                });
+            marker.addListener("dragend",
+                function() {
+                    // console.log(this.position.lat() + " " + this.position.lng())
+                    selectedmarker = this;
+                    updatePosition(selectedmarker.customInfo.id, this.position.lat(), this.position.lng());
+                });
+        }
+    }
+</script>
+<script type="text/javascript" language="javascript">
+
+    /// Fill Model Information
+    function fillInfo() {
+        $('#id').val(selectedmarker.customInfo.id);
+        $('#name').val(selectedmarker.customInfo.name);
+        $('#stdaddress').val(selectedmarker.customInfo.stdaddress);
+        $('#phone').val(selectedmarker.customInfo.phone);
+        $('#parent-name').val(selectedmarker.customInfo.parentName);
+        $('#parent-phone').val(selectedmarker.customInfo.parentPhone);
+        // $('#route-id').val(selectedmarker.customInfo.routeid);
+        let route_id = selectedmarker.customInfo.routeid;
+        console.log(selectedmarker);
+        if (route_id != "")
+            $("#routeId").select2('val', route_id);
+        else {
+            $("#routeId").select2('val', 0);
+            $('#routeId').select2({
+                placeholder: "Please select a route"
+            });
+        }
+    }
+
+    (function () {
+        loadMap();
+    })();
+</script>
+<script src="~/assets/js/jquery.min.js"></script>
+<script src="~/assets/js/jquery.ui.custom.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/jquery.uniform.js"></script>
+<script src="~/assets/js/select2.min.js"></script>
+<script src="~/assets/js/jquery.dataTables.min.js"></script>
+<script src="~/assets/js/matrix.js"></script>
+<script src="~/assets/js/matrix.tables.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#information-form").on("submit", function(e) {
+            var postData = $(this).serializeArray();
+            var formURL = $(this).attr("action");
+            $.ajax({
+                url: formURL,
+                type: "POST",
+                data: postData,
+                success: function(data) {
+                    alert("Success");
+                    selectedmarker.customInfo.routeid = $("#routeId").val();
+                    selectedmarker.setIcon("http://maps.google.com/mapfiles/ms/icons/" + colors[selectedmarker.customInfo.routeid % 6] + "-dot.png")
+                },
+                error: function(jqXHR, status, error) {
+                    console.log(status + ": " + error);
+                }
+            });
+            e.preventDefault();
+        });
+     
+        $("#submitForm").on('click', function() {
+            $("#information-form").submit();
+        });
+    });
+    function updatePosition(sid, slat, slng) {
+        var postData = {
+            id: sid,
+            lat: slat,
+            lng : slng
+        };
+        $.ajax({
+            url: "/Student/LocationUpdateAction",
+            type: "POST",
+            data: JSON.stringify(postData),
+            contentType: 'application/json',
+            success: function(data) {
+                // alert("Success");
+            },
+            error: function(jqXHR, status, error) {
+                console.log(status + ": " + error);
+            }
+        });
+    }
+</script>
+<script>
+    var studenCount = @Model.studentList.Count;
+    var routeCount = @Model.routeList.Count;
+    if (studenCount <= 0) {
+        alert("Okula Kayıtlı Öğrenci Bulunamadı\nLütfen Öğrenci Ekleyin\nVeli Menüsü Altından veli oluşturup öğrenci ekleyebilirsiniz");
+    }
+    if (routeCount <= 0) {
+        alert("Okula Kayıtlı Güzergah Bulunamadı\nLütfen Güzergah Ekleyin\nGüzergah Menüsü altından ekleyebilirsiniz");
+    }
+</script>
